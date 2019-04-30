@@ -13,3 +13,9 @@ Note: Press keys Up, Up, Down, Down, Left, Right, Left, Right, B, A
 3.) https://www.buzzfeed.com/
 4.) http://terraria.org/
 5.) http://elliottkember.com/
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+Konami Code I have used in my index.html is: "coding". So, Try it and play around with Unicorns and Rainbows :)

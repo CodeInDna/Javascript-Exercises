@@ -28,7 +28,7 @@
 <script>
   const addItems = document.querySelector('.add-items');
   const itemsList = document.querySelector('.plates');
-  const items = [];
+  const items = JSON.parse(localStorage.getItem('items')) || [];
 
   // add event listener on submit
   addItems.addEventListener('submit', addItem);
@@ -42,6 +42,9 @@
       check: false
     }
     items.push(text);   // store in array
+
+    // store locally
+    localStorage.setItem('items', JSON.stringify(items));   // store locally
 
     // display the items
     populateList(items, itemsList);
@@ -60,6 +63,10 @@
         `;
       }).join('');    // convert to string
   }
+
+  // populate list
+  populateList(items, itemsList);
+
 
 </script>
 

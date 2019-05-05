@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mouse Shadow</title>
+</head>
+<body>
+
+  <div class="hero">
+    <h1 contenteditable>🔥 AWESOME!</h1>
+  </div>
+
+  <style>
+  html {
+    color: black;
+    font-family: sans-serif;
+  }
+
+  body {
+    margin: 0;
+  }
+
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+  }
+
+  h1 {
+    text-shadow: 10px 10px 0 rgba(0,0,0,1);
+    font-size: 100px;
+  }
+  </style>
+
+<script>
+  // Selecting the elements
+  const heroEl = document.querySelector('.hero');
+  const h1El = heroEl.querySelector('h1');
+  const walk = 100;
+
+  heroEl.addEventListener('mousemove', shadow);
+
+  function shadow(e){
+    const { offsetWidth: width, offsetHeight: height} = heroEl;   // ES6 destructuring
+    let {offsetX: x, offsetY: y} = e;
+    
+    if(this !== e.target){
+      x = x + e.target.offsetLeft;
+      y = y + e.target.offsetTop;
+    }
+
+    const xwalk = (x / width * 100) - (walk / 2);
+    const ywalk = (y / width * 100) - (walk / 2);
+
+    h1El.style.textShadow = `
+        ${xwalk}px ${ywalk}px 0 rgb(249,140,182),
+        ${-xwalk}px ${ywalk}px 0 rgb(117,137,191),
+        ${ywalk}px ${-xwalk}px 0 rgb(133,202,93),
+        ${xwalk}px ${-ywalk}px 0 rgb(252,169,133)
+        `
+
+    console.log(x, width, xwalk);
+  }
+</script>
+</body>
+</html>

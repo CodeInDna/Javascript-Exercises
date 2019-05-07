@@ -35,7 +35,35 @@
   </div>
 
 <script>
-    
+    const sliderEl = document.querySelector('.items');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    sliderEl.addEventListener('mousedown', (e) => {
+        isDown = true;
+        sliderEl.classList.add('active');       // scale up effect
+        startX = e.pageX - sliderEl.offsetLeft;
+        scrollLeft = sliderEl.scrollLeft;
+    });
+
+    sliderEl.addEventListener('mouseleave', (e) => {
+        isDown = false;
+        sliderEl.classList.remove('active');
+    });
+
+    sliderEl.addEventListener('mouseup', (e) => {
+        isDown = false;
+        sliderEl.classList.remove('active');
+    });
+
+    sliderEl.addEventListener('mousemove', (e) => {
+        if(!isDown) return;     // stop the fn from running
+        e.preventDefault();
+        const x = e.pageX - sliderEl.offsetLeft;
+        const walk = x - startX;
+        sliderEl.scrollLeft = scrollLeft - walk;
+    });
 </script>
 
   </body>

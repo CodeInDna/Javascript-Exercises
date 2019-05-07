@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Follow Along Nav</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>Lit</h2>
+  <nav class="top">
+    <div class="dropdownBackground">
+      <span class="arrow"></span>
+    </div>
+
+    <ul class="cool">
+      <li>
+        <a href="#">About Me</a>
+        <div class="dropdown dropdown1">
+          <div class="bio">
+            <img src="example-image.jpg" width="100px" height="100px">
+            <p>I love web development. I enjoy building everything from small business to rich interactive web applications !</p>
+          </div>
+        </div>
+      </li>
+      <li>
+        <a href="#">Courses</a>
+        <ul class="dropdown courses">
+          <li>
+            <span class="code">Laravel</span>
+            <a href="#">Laravel</a>
+          </li>
+          <li>
+            <span class="code">ES6</span>
+            <a href="#">ES6 For Everyone</a>
+          </li>
+          <li>
+            <span class="code">NODE</span>
+            <a href="#">Learn Node</a>
+          </li>
+          <li>
+            <span class="code">STPU</span>
+            <a href="#">Sublime Text Power User</a>
+          </li>
+          <li>
+            <span class="code">WTF</span>
+            <a href="#">What The Flexbox?!</a>
+          </li>
+          <li>
+            <span class="code">GRID</span>
+            <a href="#">CSS Grid</a>
+          </li>
+          <li>
+            <span class="code">LRX</span>
+            <a href="#">Learn Redux</a>
+          </li>
+          <li>
+            <span class="code">CLPU</span>
+            <a href="#">Command Line Power User</a>
+          </li>
+          <li>
+            <span class="code">MMD</span>
+            <a href="#">Mastering Markdown</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">Other Links</a>
+        <ul class="dropdown dropdown3">
+          <li><a class="button" href="#">Twitter</a></li>
+          <li><a class="button" href="#">Facebook</a></li>
+          <li><a class="button" href="#">Blog</a></li>
+          <li><a class="button" href="#">GitHub</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+
+
+<script>
+   const liEl = document.querySelectorAll('.cool > li');
+   const backgroundEl = document.querySelector('.dropdownBackground');
+   const navEl = document.querySelector('.top');   // li + background
+
+   // event listeners
+   liEl.forEach(li => li.addEventListener('mouseenter', handleEnter));
+   liEl.forEach(li => li.addEventListener('mouseleave', handleLeave));
+
+   // functions
+   function handleEnter(){
+      // content show 
+      this.classList.add('trigger-enter');
+      setTimeout(()=> this.classList.contains('trigger-enter') && this.classList.add('trigger-enter-active'), 150);
+
+      // background show
+      backgroundEl.classList.add('open');
+
+      // select the dropdown of each li element seprately
+      const dropdownEl = this.querySelector('.dropdown');
+      const dropdownCoords = dropdownEl.getBoundingClientRect();  // get coordinates
+      const navCoords = navEl.getBoundingClientRect();  // get coordinates
+      const coords = {
+        width: dropdownCoords.width,
+        height: dropdownCoords.height,
+        left: dropdownCoords.left - navCoords.left,
+        top: dropdownCoords.top - navCoords.top
+      }
+
+      // set property
+      backgroundEl.style.setProperty('width',`${coords.width}px`);
+      backgroundEl.style.setProperty('height',`${coords.height}px`);
+      backgroundEl.style.setProperty('transform',`translate(${coords.left}px, ${coords.top}px)`);
+      
+   }
+
+   function handleLeave(){
+      // content hide
+      this.classList.remove('trigger-enter', 'trigger-enter-active');
+
+      // background hide
+      backgroundEl.classList.remove('open');
+
+     
+   }
+ 
+</script>
+
+</body>
+</html>

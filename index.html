@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS Variables and JS</title>
+</head>
+<body>
+  <h3>Modify <span class='h3'>CSS</span> Variables using <span class='h3'>JS</span></h3>
+
+  <div class="controls">
+    <div class="box-container">
+    <div class="box">
+      <label for="spacing">Spacing:</label>
+      <input type="range" min="10" max="200" value="10" id="spacing" name="spacing" data-units="px">
+    </div>
+    
+    <div class="box">
+    <label for="blur">Blur:</label>
+    <input id="blur" type="range" name="blur" min="0" max="25" value="10" data-units="px">
+    </div>
+    </div>
+    
+    <div class="box-container">
+    <div class="box">
+    <label for="back">Back Color</label>
+    <input id="back" type="color" name="back" value="#8EC2D8">
+    </div>
+
+    <div class="box">
+    <label for="base">Base Color</label>
+    <input id="base" type="color" name="base" value="#2974A2">
+    </div>
+
+    </div>
+  </div>
+
+  <img src="example-image.jpg">
+
+  <style>
+
+    :root{
+      --spacing: 10px;
+      --blur: 10px;
+      --back: #8EC2D8;
+      --base: #2974A2;
+    }
+
+    img{
+      padding: var(--spacing);
+      filter: blur(var(--blur));
+      background-color: var(--base);
+    }
+
+    .h3{
+      color: var(--base);
+      -webkit-text-stroke: 1px black;
+    }
+
+    body {
+      text-align: center;
+      background: var(--back);
+      color: white;
+      font-family: 'helvetica neue', sans-serif;
+      font-weight: 100;
+      font-size: 30px;
+    }
+
+    .controls {
+      margin-bottom: 50px;
+    }
+
+    input {
+      width: 100px;
+
+    }
+
+    img{
+      width: 40%;
+    }
+
+    .box-container{
+      margin-bottom: 1rem;
+    }
+    
+    .box{
+          border: 1px solid #857366;
+          border-radius: 10px;
+          width: 14%;
+          margin: auto;
+          padding: 10px;
+          background: #857366;
+          display: inline-block;
+    }
+
+  </style>
+
+  <script>
+    // Select all input fields
+    var inputs = document.querySelectorAll('controls,input');
+
+    // Trigger Event on input Change or Mouse move
+    inputs.forEach(input => input.addEventListener('change', handleChange));
+    inputs.forEach(input => input.addEventListener('mousemove', handleChange));
+
+    //Handle Change
+    function handleChange(){
+      const suffix = this.dataset.units || '';
+      //set css variable to new input value
+      document.documentElement.style.setProperty(`--${this.name}`, this.value+suffix);
+    }
+  </script>
+
+</body>
+</html>
